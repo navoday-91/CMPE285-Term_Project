@@ -2,7 +2,7 @@ import json
 import datetime
 import urllib.request
 import math
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 app = Flask(__name__)
 
@@ -17,9 +17,9 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/financial")
-def finance():
-    return render_template('financial.html')
+@app.route("/slider2")
+def slider2():
+    return redirect("http://www.cmpe285-nst.tk/assignment1", code=200)
 
 @app.route("/suggestion")
 def suggestion():
