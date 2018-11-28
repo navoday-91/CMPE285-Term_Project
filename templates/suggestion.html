@@ -27,13 +27,7 @@
 				<div class="col">
 					<div class="home_content">
 						<div class="home_content_inner">
-							<div class="home_title">Services</div>
-							<div class="home_breadcrumbs">
-								<ul>
-									<li><a href="financial.html">Home</a></li>
-									<li>Services</li>
-								</ul>
-							</div>
+							<div class="home_title">Stock Portfolio Suggestion</div>
 						</div>
 					</div>
 				</div>
@@ -333,29 +327,38 @@
 	
 	<!-- Points -->
 
-	<div class="points">
+	<div class="call">
 		<div class="container">
-			<div class="row">
-				<div class="col">
+			<div class="call_container">
+				<div class="call_form_container">
 					<div class="section_title_container">
-						<div class="section_subtitle">Select your choices</div>
+						<div class="section_subtitle">Stock Portfolio Suggestions</div>
+						<div class="section_title">Select Values To See Your Quote</div>
 					</div>
+					<form action="#" class="call_form">
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" class="input_item" placeholder="Your Name" required="required">
+							</div>
+							<div class="col-md-6">
+								<input type="email" class="input_item" placeholder="Your E-mail" required="required">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="input_item" placeholder="Your Phone">
+							</div>
+							<div class="col-md-6">
+								<select class="dropdown_item input_item">
+									<option>Business type</option>
+									<option>Business type</option>
+									<option>Business type</option>
+								</select>
+							</div>
+							<div class="col-md-12">
+								<button id="call_btn" type="submit" class="call_button trans_200" value="Submit">submit</button>
+							</div>
+						</div>
+					</form>
 				</div>
-			</div>
-			<div class="row points_container">
-				
-				<form action="/assignment2" method="post" ajax="true">
-					<div class="input-field">
-						<label for="amount">Investment Amount:</label>
-						<input type="number" step="any" name="amount" id="amount" placeholder="Investment Amount" required/>
-					</div>
-					<div class="input-field">
-						<label for="strategy">Investment Strategy:</label>
-						<input type="text" name="strategy" id="strategy" placeholder="Strategy" required/>
-					</div>
-						<input type="submit" class="btn btn-primary btn-block" value="Compute">
-				</form>
-
 			</div>
 		</div>
 	</div>
