@@ -330,27 +330,27 @@
 	<div class="call">
 		<div class="container">
 			<div class="call_container">
+				<div class="section_title_container">
+					<div class="section_subtitle">Stock Portfolio Suggestions</div>
+					<div class="section_title">Select Values To See Your Quote</div>
+				</div>
 				<div class="call_form_container">
-					<div class="section_title_container">
-						<div class="section_subtitle">Stock Portfolio Suggestions</div>
-						<div class="section_title">Select Values To See Your Quote</div>
-					</div>
 					<form action="#" class="call_form">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" class="input_item" placeholder="Your Name" required="required">
+								<input type="text" class="input_item" name="name" id="name" placeholder="Your Name" required="required">
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="input_item" placeholder="Your E-mail" required="required">
+								<input type="email" class="input_item" name="email" id="email" placeholder="Your E-mail" required="required">
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="input_item" placeholder="Your Phone">
+								<input type="number" step="any" name="amount" id="amount" class="input_item" placeholder="Investment Amount">
 							</div>
 							<div class="col-md-6">
-								<select class="dropdown_item input_item">
-									<option>Business type</option>
-									<option>Business type</option>
-									<option>Business type</option>
+								<select class="dropdown_item input_item" name="strategy" id="strategy">
+									<option>Ethical Investing</option>
+									<option>Index Investing</option>
+									<option>Growth Investing</option>
 								</select>
 							</div>
 							<div class="col-md-12">
