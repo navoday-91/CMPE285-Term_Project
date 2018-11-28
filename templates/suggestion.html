@@ -338,90 +338,23 @@
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container">
-						<div class="section_subtitle">take a look at our</div>
-						<div class="section_title">Our Services</div>
+						<div class="section_subtitle">Select your choices</div>
 					</div>
 				</div>
 			</div>
 			<div class="row points_container">
 				
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_1.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">We take care of you</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
+				<form action="/assignment2" method="post" ajax="true">
+					<div class="input-field">
+						<label for="amount">Investment Amount:</label>
+						<input type="number" step="any" name="amount" id="amount" placeholder="Investment Amount" required/>
 					</div>
-				</div>
-
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_2.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">Fast support & updates</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
+					<div class="input-field">
+						<label for="strategy">Investment Strategy:</label>
+						<input type="text" name="strategy" id="strategy" placeholder="Strategy" required/>
 					</div>
-				</div>
-
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_3.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">Risk Analysis</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_4.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">Venture Capitals</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_5.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">The Stock Market</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Service -->
-				<div class="col-lg-4 col-md-6 point_col">
-					<div class="point clearfix">
-						<div class="point_image"><img src="/static/images/services_6.png" alt=""></div>
-						<div class="point_content">
-							<div class="point_title">Mutual Funds</div>
-							<div class="point_text">
-								<p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris.</p>
-							</div>
-						</div>
-					</div>
-				</div>
+						<input type="submit" class="btn btn-primary btn-block" value="Compute">
+				</form>
 
 			</div>
 		</div>
