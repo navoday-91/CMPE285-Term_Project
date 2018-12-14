@@ -2,7 +2,7 @@ import json
 import datetime
 import urllib.request
 import math
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -16,10 +16,6 @@ def input():
 def about():
     return render_template('about.html')
 
-
-@app.route("/slider2")
-def slider2():
-    return redirect("http://www.cmpe285-nst.tk/assignment1", code=200)
 
 @app.route("/suggestion")
 def suggestion():
@@ -48,21 +44,9 @@ def mapStock():
 
 @app.route("/calculate", methods=['POST'])
 def calculate():
-    stock1Amount = float(request.form.get('stock1Amount'))
-    stock2Amount = float(request.form.get('stock2Amount'))
-    stock3Amount = float(request.form.get('stock3Amount'))
+    stockAmount = float(request.form.get('amount'))
 
-    print('stock1Amount = ' + str(stock1Amount));
-    print('stock2Amount = ' + str(stock2Amount));
-    print('stock3Amount = ' + str(stock3Amount));
-
-    stock1Symbol = request.form.get('stock1Symbol')
-    stock2Symbol = request.form.get('stock2Symbol')
-    stock3Symbol = request.form.get('stock3Symbol')
-
-    print('stock1Symbol = ' + stock1Symbol);
-    print('stock2Symbol = ' + stock2Symbol);
-    print('stock3Symbol = ' + stock3Symbol);
+    print('stock1Amount = ' + str(stockAmount));
 
     # get buy number of each stock
     stock1 = {'symbol': stock1Symbol, 'amount': stock1Amount, 'buyNumber': 0}
@@ -143,39 +127,21 @@ def calculate():
                            date4Total=round(date4Total, 4),
                            date5Total=round(date5Total, 4))
 
+def getMapStocks(strategy, substrategy = None):
+    result = {"ethical": {
+                        "alt_energy": ["NYLD", "PEGI", "AY","NEE","FSLR","SEDG","REGI","GPRE","TOT"], 
+                        "zero_waste": ["WM", "RSG", "CVA"], "water": ["DHR", "XYL", "PNR"], 
+                        "reduce": ["BIP","USCR"], "reuse": ["IP"],
+                        "sustain": ["WY"]},
+            "index": ["VOO", "SCHA", "VYM", "FSTMX", "VTSMX", "VEU", "SCHZ", "BLV", "GAMR", "VSS"],
+            "growth": ["SBUX", "NXPI", "FB","SFIX","JNJ","BRK.B","BRK.A","CNC","AAPL","SFM","DWDP"],
+            "quality": ["GOOG","AMZN","AWK","AAPL","DIS","FB","NKE","MSFT","BAC","ADP"],
+            "value": ["AAL","ALL","AZO","DHI","KHC","MPC","NFX","PHM","UAL","URI"]}
 
-############################ FUNCTIONS ############################
-def getMapStocks(strategy):
-    if strategy == 'ethical':
-        return [
-            {'name': 'Apple', 'symbol': 'AAPL'},
-            {'name': 'Adobe', 'symbol': 'ADBE'},
-            {'name': 'Walmart Inc', 'symbol': 'WMT'}
-        ]
-    elif strategy == 'growth':
-        return [
-            {'name': 'WPX Energy', 'symbol': 'WPX', 'amount': 0},
-            {'name': 'Square', 'symbol': 'SQ', 'amount': 0},
-            {'name': 'Helmerich & Payne', 'symbol': 'HP', 'amount': 0}
-        ]
-    elif strategy == 'index':
-        return [
-            {'name': 'Vanguard Total Stock Market ETF', 'symbol': 'VTI', 'amount': 0},
-            {'name': 'iShares Core MSCI Total Intl Stk', 'symbol': 'IXUS', 'amount': 0},
-            {'name': 'iShares Core 10+ Year USD Bond', 'symbol': 'ILTB', 'amount': 0}
-        ]
-    elif strategy == 'quality':
-        return [
-            {'name': 'National Oilwell Varco', 'symbol': 'NOV', 'amount': 0},
-            {'name': 'JD.com', 'symbol': 'JD', 'amount': 0},
-            {'name': 'ServiceNow', 'symbol': 'NOW', 'amount': 0}
-        ]
-    elif strategy == 'value':
-        return [
-            {'name': 'Western Digital', 'symbol': 'WDC', 'amount': 0},
-            {'name': 'Lam Research', 'symbol': 'LRCX', 'amount': 0},
-            {'name': 'Micron Technology, Inc.', 'symbol': 'MU', 'amount': 0}
-        ]
+    if strategy == "ethical":
+        return result[strategy][substrategy]
+    else:
+        return result[strategy]
 
 
 def getHistoricData(symbol1, symbol2, symbol3):
