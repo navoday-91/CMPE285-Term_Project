@@ -100,7 +100,7 @@ $(document).ready(function()
 			{
 				items:1,
 				loop:true,
-				smartSpeed:10000,
+				smartSpeed:1200,
 				autoplay:true,
 				dots:true,
 				nav:false,

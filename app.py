@@ -98,11 +98,40 @@ def mapStock():
 
     setHistoryTodayValue(stock1, stock2, stock3)
     print('======= TOTAL VALUE of three stocks =========')
-    print(stock1['history'][0]['total'])
-    print(stock1['history'][1]['total'])
-    print(stock1['history'][2]['total'])
-    print(stock1['history'][3]['total'])
-    print(stock1['history'][4]['total'])
+    js_return_stock1 = []
+    js_return_stock2 = []
+    js_return_stock3 = []
+    js_stock_total = []
+    js_return_stock1_30d = []
+    js_return_stock2_30d = []
+    js_return_stock3_30d = []
+    js_stock_total_30d = []
+    for i in range(5, 0, -1):
+        js_return_stock1.append(stock1['history'][-i]['total'])
+        js_return_stock2.append(stock2['history'][-i]['total'])
+        js_return_stock3.append(stock3['history'][-i]['total'])
+        js_stock_total.append(stock1['history'][-i]['total']+ stock2['history'][i]['total'] + stock3['history'][i]['total'])
+
+    len1 = len(stock1['history'])
+    len2 = len(stock2['history'])
+    len3 = len(stock3['history'])
+    max_len = max([len1, len2, len3])
+    for i in max_len:
+        if len1 > i:
+            js_return_stock1_30d.append(stock1['history'][i]['total'])
+        else:
+            js_return_stock1_30d.append(js_return_stock1_30d[-1])
+        if len2 > i:
+            js_return_stock2_30d.append(stock2['history'][i]['total'])
+        else:
+            js_return_stock2_30d.append(js_return_stock2_30d[-1])
+        if len3 > i:
+            js_return_stock3_30d.append(stock3['history'][i]['total'])
+        else:
+            js_return_stock3_30d.append((js_return_stock3_30d[-1]))
+        js_stock_total_30d.append(js_return_stock3_30d[i] + js_return_stock1_30d[i] + js_return_stock2_30d[i])
+
+
 
     # output
     totalValueNow = stock1Amount + stock2Amount + stock3Amount
@@ -156,9 +185,15 @@ def mapStock():
                            stock1cost=stock1['history'][-1]['close'],
                            stock2cost=stock2['history'][-1]['close'],
                            stock3cost=stock3['history'][-1]['close'],
-                           stock1history=stock1['history'],
-                           stock2history=stock2['history'],
-                           stock3history=stock3['history']
+                           stock1history=js_return_stock1,
+                           stock2history=js_return_stock2,
+                           stock3history=js_return_stock3,
+                           stockTotalHistory=js_stock_total,
+                           stock1history30d=js_return_stock1_30d,
+                           stock2history30d=js_return_stock2_30d,
+                           stock3history30d=js_return_stock3_30d,
+                           stockTotalHistory30d=js_stock_total_30d,
+                           maxlen=max_len
                            )
 
 
@@ -190,7 +225,7 @@ def getMapStocks(strategy, substrategy = None):
     return [result[i] for i in index_list]
 
 def getHistoricData(symbol1, symbol2, symbol3):
-    url = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol1 + ',' + symbol2 + ',' + symbol3 + '&types=chart&range=5d&last=5&filter=date,close'
+    url = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol1 + ',' + symbol2 + ',' + symbol3 + '&types=chart&range=1m&last=5&filter=date,close'
     json_str = requests.get(url)
     print(json_str.content)
     data = json.loads(json_str.content);
@@ -213,9 +248,11 @@ def getBuyNumber(obj1, obj2, obj3):
 
 
 def setHistoryTodayValue(obj1, obj2, obj3):
-    for i in range(5):
+    for i in range(len(obj1['history'])):
         obj1['history'][i]['total'] = obj1['buyNumber'] * obj1['history'][i]['close']
+    for i in range(len(obj2['history'])):
         obj2['history'][i]['total'] = obj2['buyNumber'] * obj2['history'][i]['close']
+    for i in range(len(obj3['history'])):
         obj3['history'][i]['total'] = obj3['buyNumber'] * obj3['history'][i]['close']
 
 

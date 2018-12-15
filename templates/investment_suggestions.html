@@ -94,9 +94,41 @@
              };
 
              // Instantiate and draw the chart.
-             var chart1 = new google.visualization.LineChart(document.getElementById('linechart'));
+             var chart1 = new google.visualization.LineChart(document.getElementById('testchart'));
              chart1.draw(data1, options1);
           }
+          window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Simple Line Chart"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 450 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 510 }
+		]
+	}]
+});
+chart.render();
+
+}
      </script>
 <title>Stock Portfolio Suggestion</title>
 <meta charset="utf-8">
@@ -351,7 +383,7 @@
                                     <div class="container">
 							        <div class="row">
 								    <div class="col">
-                                    <div class="card" id="donutchart" align="center" style="width: 500px; height: 500px;">
+                                    <div class="card" id="donutchart" align="center" style="width: 500px; height: 400px;">
                                         <canvas id="myChart"></canvas>
 
                                     </div>
@@ -393,10 +425,58 @@
                             <div class="owl-item">
                                 <div class="slider_background" style="background-image:url(/static/images/home_slider_1.jpg)"></div>
                                 <div class="home_slider_content text-center">
-                                    <h1>Weekly Trends</h1>
-                                    <div class="card" id="linechart" align="center" style="width: 900px; height: 500px;">
-                                        <canvas id="myChart1"></canvas>
-                                    </div>
+                                    <h1 align="center"><font color=#1B5181>
+                                        <b>Weekly Trend</b>
+                                    </font></h1>
+
+                                    <!-- Line Graph JS -->
+                                    <div class="container-fluid">
+                                                    <div class="card" id="lineJS" align="center" >
+                                                        <canvas id="myChartLine" style="width: 800px; height: 400px;"></canvas>
+                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+                                                        <script type="text/javascript">
+                                     var stock1history = {{stock1history}}
+                                     var stock2history = {{stock2history}}
+                                     var stock3history = {{stock3history}}
+                                     var stock_total_history = {{stockTotalHistory}}
+                                     var ctx = document.getElementById("myChartLine").getContext('2d');
+                                     var myChartLine = new Chart(ctx, {
+                                      type: 'line',
+                                      data: {
+                                        labels: [1,2,3,4,5],
+                                        datasets: [{
+                                            data: stock1history,
+                                            label: "{{stock1Symbol}}",
+                                            borderColor: "#3e95cd",
+                                            fill: false
+                                          }, {
+                                          data: stock2history,
+                                            label: "{{stock2Symbol}}",
+                                            borderColor: "#8e5ea2",
+                                            fill: false
+                                          }, {
+                                            data: stock3history,
+                                            label: "{{stock3Symbol}}",
+                                            borderColor: "#3cba9f",
+                                            fill: false
+                                          }, {
+                                            data: stock_total_history,
+                                            label: "Portfolio Total",
+                                            borderColor: "#c45850",
+                                            fill: false
+                                          }
+                                        ]
+                                      },
+                                      options: {
+                                        title: {
+                                          display: true,
+                                          text: 'Portfolio Trend Over Last Week'
+                                        }
+                                      }
+                                    });
+                                                        </script>
+                                                    </div></div>
+
                                 </div>
                             </div>
 
@@ -405,7 +485,58 @@
                                 <div class="slider_background" style="background-image:url(/static/images/home_slider_1.jpg)"></div>
                                 <div class="home_slider_content text-center">
                                     <h1>More updates are on the way</h1>
-                                    <div class="home_slider_text">Check back in for incoming updates!</div>
+                                    <!-- Line Graph JS -->
+                                    <div class="container-fluid">
+                                                    <div class="card" id="lineJS1" align="center" >
+                                                        <canvas id="myChartLine1" style="width: 800px; height: 400px;"></canvas>
+                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+                                                        <script type="text/javascript">
+                                     var stock1history30d = {{stock1history30d}}
+                                     var stock2history30d = {{stock2history30d}}
+                                     var stock3history30d = {{stock3history30d}}
+                                     var stock_total_history30d = {{stockTotalHistory30d}}
+                                     var maxlen = {{max_len_30d}}
+                                     var ctx = document.getElementById("myChartLine1").getContext('2d');
+                                     labels_list = [];
+                                     for(var i=1; i<=maxlen; i++){
+                                        labels_list.push(i);
+                                     }
+                                     var myChartLine = new Chart(ctx, {
+                                      type: 'line',
+                                      data: {
+                                        labels: labels_list,
+                                        datasets: [{
+                                            data: stock1history,
+                                            label: "{{stock1Symbol}}",
+                                            borderColor: "#3e95cd",
+                                            fill: false
+                                          }, {
+                                          data: stock2history,
+                                            label: "{{stock2Symbol}}",
+                                            borderColor: "#8e5ea2",
+                                            fill: false
+                                          }, {
+                                            data: stock3history,
+                                            label: "{{stock3Symbol}}",
+                                            borderColor: "#3cba9f",
+                                            fill: false
+                                          }, {
+                                            data: stock_total_history,
+                                            label: "Portfolio Total",
+                                            borderColor: "#c45850",
+                                            fill: false
+                                          }
+                                        ]
+                                      },
+                                      options: {
+                                        title: {
+                                          display: true,
+                                          text: 'Portfolio Trend Over Last Week'
+                                        }
+                                      }
+                                    });
+                                                        </script>
+                                                    </div></div>
                                 </div>
                             </div>
                         </div>
