@@ -41,10 +41,14 @@ def mapStock():
     amount = float(amount)
 
     stockAmounts = []
-    partAmount = math.floor(amount / 3)
-    stockAmounts.append(partAmount)
-    stockAmounts.append(partAmount)
-    stockAmounts.append(amount - partAmount * 2)
+    percentages = [80]
+    while sum(percentages) > 70:
+        percentages = []
+        for _ in range(2):
+            percentages.append(random.randint(20, 75))
+    stockAmounts.append(round(amount*(percentages[0]/100)))
+    stockAmounts.append(round(amount*(percentages[1]/100)))
+    stockAmounts.append(amount - (stockAmounts[0] + stockAmounts[1]))
 
     stocks = getMapStocks(strategy)
     stock1Symbol = stocks[0]
@@ -145,7 +149,17 @@ def mapStock():
                            date2Total=round(date2Total, 4),
                            date3Total=round(date3Total, 4),
                            date4Total=round(date4Total, 4),
-                           date5Total=round(date5Total, 4))
+                           date5Total=round(date5Total, 4),
+                           buynumber1=round(stock1['buyNumber']),
+                           buynumber2=round(stock2['buyNumber']),
+                           buynumber3=round(stock3['buyNumber']),
+                           stock1cost=stock1['history'][-1]['close'],
+                           stock2cost=stock2['history'][-1]['close'],
+                           stock3cost=stock3['history'][-1]['close'],
+                           stock1history=stock1['history'],
+                           stock2history=stock2['history'],
+                           stock3history=stock3['history']
+                           )
 
 
 ############################ FUNCTIONS ############################
