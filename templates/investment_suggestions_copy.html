@@ -58,13 +58,13 @@
 
           function drawChart1() {
              // Define the chart to be drawn.
-             var data1 = new google.visualization.DataTable();
-             data1.addColumn('string', 'Month');
-             data1.addColumn('number', 'Tokyo');
-             data1.addColumn('number', 'New York');
-             data1.addColumn('number', 'Berlin');
-             data1.addColumn('number', 'London');
-             data1.addRows([
+             var data = new google.visualization.DataTable();
+             data.addColumn('string', 'Month');
+             data.addColumn('number', 'Tokyo');
+             data.addColumn('number', 'New York');
+             data.addColumn('number', 'Berlin');
+             data.addColumn('number', 'London');
+             data.addRows([
                 ['Jan',  7.0, -0.2, -0.9, 3.9],
                 ['Feb',  6.9, 0.8, 0.6, 4.2],
                 ['Mar',  9.5,  5.7, 3.5, 5.7],
@@ -81,7 +81,7 @@
              ]);
 
              // Set chart options
-             var options1 = {'title' : 'Average Temperatures of Cities',
+             var options = {'title' : 'Average Temperatures of Cities',
                 hAxis: {
                    title: 'Month'
                 },
@@ -94,9 +94,11 @@
              };
 
              // Instantiate and draw the chart.
-             var chart1 = new google.visualization.LineChart(document.getElementById('linechart'));
-             chart1.draw(data1, options1);
+             var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+             chart.draw(data, options);
           }
+
+
      </script>
 <title>Stock Portfolio Suggestion</title>
 <meta charset="utf-8">
@@ -300,7 +302,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col">
-									<a href="/">home</a>
+									<a href="#">home</a>
 								</div>
 							</div>
 						</div>
@@ -309,17 +311,43 @@
 						<div class="container">
 							<div class="row">
 								<div class="col">
-									<a href="/about">about us</a>
+									<a href="about.html">about us</a>
 								</div>
 							</div>
 						</div>
 					</li>
-
 					<li class="menu_item">
 						<div class="container">
 							<div class="row">
 								<div class="col">
-									<a href="/contact">contact</a>
+									<a href="listings.html">services</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="menu_item">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<a href="news.html">portfolio</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="menu_item">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<a href="contact.html">blog</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="menu_item">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<a href="contact.html">contact</a>
 								</div>
 							</div>
 						</div>
