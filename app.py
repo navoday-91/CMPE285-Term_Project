@@ -1,6 +1,6 @@
-import json
+import json, random
 import datetime
-import urllib.request
+import requests
 import math
 from flask import Flask, request, render_template
 
@@ -17,15 +17,27 @@ def about():
     return render_template('about.html')
 
 
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
+
+
 @app.route("/suggestion")
 def suggestion():
     return render_template('suggestion.html')
+
+
+@app.route("/test_suggestion")
+def test_suggestion():
+    return render_template('investment_suggestions.html')
 
 
 @app.route("/map_stocks", methods=['POST'])
 def mapStock():
     amount = request.form.get('amount')
     strategy = request.form.get('strategy')
+    name = request.form.get('name')
+    email = request.form.get('email')
     amount = float(amount)
 
     stockAmounts = []
@@ -35,18 +47,26 @@ def mapStock():
     stockAmounts.append(amount - partAmount * 2)
 
     stocks = getMapStocks(strategy)
-    stocks[0]['amount'] = stockAmounts[0]
-    stocks[1]['amount'] = stockAmounts[1]
-    stocks[2]['amount'] = stockAmounts[2]
+    stock1Symbol = stocks[0]
+    stock2Symbol = stocks[1]
+    stock3Symbol = stocks[2]
 
-    return render_template('map_stocks.html', stock1=stocks[0], stock2=stocks[1], stock3=stocks[2])
+    print('stock1Symbol = ' + stock1Symbol);
+    print('stock2Symbol = ' + stock2Symbol);
+    print('stock3Symbol = ' + stock3Symbol);
 
+    amounts = [0,0,0]
+    amounts[0]= stockAmounts[0]
+    amounts[1]= stockAmounts[1]
+    amounts[2]= stockAmounts[2]
 
-@app.route("/calculate", methods=['POST'])
-def calculate():
-    stockAmount = float(request.form.get('amount'))
+    stock1Amount = float(stockAmounts[0])
+    stock2Amount = float(stockAmounts[1])
+    stock3Amount = float(stockAmounts[2])
 
-    print('stock1Amount = ' + str(stockAmount));
+    print('stock1Amount = ' + str(stock1Amount));
+    print('stock2Amount = ' + str(stock2Amount));
+    print('stock3Amount = ' + str(stock3Amount));
 
     # get buy number of each stock
     stock1 = {'symbol': stock1Symbol, 'amount': stock1Amount, 'buyNumber': 0}
@@ -108,7 +128,7 @@ def calculate():
     print('date4Total = ' + str(date4Total))
     print('date5Total = ' + str(date5Total))
 
-    return render_template('dashboard.html',
+    return render_template('investment_suggestions.html',
                            totalValueNow=totalValueNow,
                            stock1Symbol=stock1Symbol,
                            stock2Symbol=stock2Symbol,
@@ -127,10 +147,12 @@ def calculate():
                            date4Total=round(date4Total, 4),
                            date5Total=round(date5Total, 4))
 
+
+############################ FUNCTIONS ############################
 def getMapStocks(strategy, substrategy = None):
-    result = {"ethical": {
-                        "alt_energy": ["NYLD", "PEGI", "AY","NEE","FSLR","SEDG","REGI","GPRE","TOT"], 
-                        "zero_waste": ["WM", "RSG", "CVA"], "water": ["DHR", "XYL", "PNR"], 
+    result = {"Ethical Investing": {
+                        "alt_energy": ["NYLD", "PEGI", "AY","NEE","FSLR","SEDG","REGI","GPRE","TOT"],
+                        "zero_waste": ["WM", "RSG", "CVA"], "water": ["DHR", "XYL", "PNR"],
                         "reduce": ["BIP","USCR"], "reuse": ["IP"],
                         "sustain": ["WY"]},
             "index": ["VOO", "SCHA", "VYM", "FSTMX", "VTSMX", "VEU", "SCHZ", "BLV", "GAMR", "VSS"],
@@ -138,42 +160,41 @@ def getMapStocks(strategy, substrategy = None):
             "quality": ["GOOG","AMZN","AWK","AAPL","DIS","FB","NKE","MSFT","BAC","ADP"],
             "value": ["AAL","ALL","AZO","DHI","KHC","MPC","NFX","PHM","UAL","URI"]}
 
-    if strategy == "ethical":
-        return result[strategy][substrategy]
+    if strategy == "Ethical Investing":
+        #return result[strategy][substrategy]
+        result = result[strategy]["alt_energy"]
     else:
-        return result[strategy]
+        result = result[strategy]
+    l = len(result)
+    index_list = []
+    while len(index_list) < 3:
+        num = random.randint(0, l-1)
+        if num not in index_list:
+            print(num)
+            index_list.append(num)
 
+    return [result[i] for i in index_list]
 
 def getHistoricData(symbol1, symbol2, symbol3):
     url = 'https://api.iextrading.com/1.0/stock/market/batch?symbols=' + symbol1 + ',' + symbol2 + ',' + symbol3 + '&types=chart&range=5d&last=5&filter=date,close'
-    req = urllib2.Request(url)
-    response = urllib2.urlopen(req)
-    json_str = response.read()
-    print(json_str)
-    data = json.loads(json_str);
+    json_str = requests.get(url)
+    print(json_str.content)
+    data = json.loads(json_str.content);
     return data;
 
 
 def getBuyNumber(obj1, obj2, obj3):
     url1 = 'https://api.iextrading.com/1.0/stock/' + obj1['symbol'] + '/price'
-    print('rul1 = ' + url1)
-    req1 = urllib2.Request(url1)
-    response1 = urllib2.urlopen(req1)
-    obj1['price'] = float(response1.read())
+    response1 = requests.get(url1)
+    obj1['price'] = float(response1.content)
     obj1['buyNumber'] = obj1['amount'] / obj1['price']
 
     url2 = 'https://api.iextrading.com/1.0/stock/' + obj2['symbol'] + '/price'
-    print('rul2 = ' + url2)
-    req2 = urllib2.Request(url2)
-    response2 = urllib2.urlopen(req2)
-    obj2['price'] = float(response2.read())
+    obj2['price'] = float(requests.get(url2).content)
     obj2['buyNumber'] = obj2['amount'] / obj2['price']
 
     url3 = 'https://api.iextrading.com/1.0/stock/' + obj3['symbol'] + '/price'
-    print('rul3 = ' + url3)
-    req3 = urllib2.Request(url3)
-    response3 = urllib2.urlopen(req3)
-    obj3['price'] = float(response3.read())
+    obj3['price'] = float(requests.get(url3).content)
     obj3['buyNumber'] = obj3['amount'] / obj3['price']
 
 
