@@ -435,10 +435,10 @@ chart.render();
                                                         <canvas id="myChartLine" style="width: 800px; height: 400px;"></canvas>
                                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                                                         <script type="text/javascript">
-                                     var stock1history = {{stock1history}}
-                                     var stock2history = {{stock2history}}
-                                     var stock3history = {{stock3history}}
-                                     var stock_total_history = {{stockTotalHistory}}
+                                     var stock1history = {{stock1history}};
+                                     var stock2history = {{stock2history}};
+                                     var stock3history = {{stock3history}};
+                                     var stock_total_history = {{stockTotalHistory}};
                                      var ctx = document.getElementById("myChartLine").getContext('2d');
                                      var myChartLine = new Chart(ctx, {
                                       type: 'line',
@@ -484,18 +484,21 @@ chart.render();
                             <div class="owl-item">
                                 <div class="slider_background" style="background-image:url(/static/images/home_slider_1.jpg)"></div>
                                 <div class="home_slider_content text-center">
-                                    <h1>More updates are on the way</h1>
+                                    <h1 align="center"><font color=#1B5181>
+                                        <b>Monthly Trend</b>
+                                    </font></h1>
                                     <!-- Line Graph JS -->
                                     <div class="container-fluid">
                                                     <div class="card" id="lineJS1" align="center" >
                                                         <canvas id="myChartLine1" style="width: 800px; height: 400px;"></canvas>
                                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                                                         <script type="text/javascript">
-                                     var stock1history30d = {{stock1history30d}}
-                                     var stock2history30d = {{stock2history30d}}
-                                     var stock3history30d = {{stock3history30d}}
-                                     var stock_total_history30d = {{stockTotalHistory30d}}
-                                     var maxlen = {{max_len_30d}}
+                                     var stock1history30d = {{stock1history30d}};
+                                     var stock2history30d = {{stock2history30d}};
+                                     var stock3history30d = {{stock3history30d}};
+
+                                     var stock_total_history30d = {{stockTotalHistory30d}};
+                                     var maxlen = {{maxlen}}
                                      var ctx = document.getElementById("myChartLine1").getContext('2d');
                                      labels_list = [];
                                      for(var i=1; i<=maxlen; i++){
@@ -506,22 +509,22 @@ chart.render();
                                       data: {
                                         labels: labels_list,
                                         datasets: [{
-                                            data: stock1history,
+                                            data: stock1history30d,
                                             label: "{{stock1Symbol}}",
                                             borderColor: "#3e95cd",
                                             fill: false
                                           }, {
-                                          data: stock2history,
+                                          data: stock2history30d,
                                             label: "{{stock2Symbol}}",
                                             borderColor: "#8e5ea2",
                                             fill: false
                                           }, {
-                                            data: stock3history,
+                                            data: stock3history30d,
                                             label: "{{stock3Symbol}}",
                                             borderColor: "#3cba9f",
                                             fill: false
                                           }, {
-                                            data: stock_total_history,
+                                            data: stock_total_history30d,
                                             label: "Portfolio Total",
                                             borderColor: "#c45850",
                                             fill: false
@@ -531,7 +534,7 @@ chart.render();
                                       options: {
                                         title: {
                                           display: true,
-                                          text: 'Portfolio Trend Over Last Week'
+                                          text: 'Portfolio Trend Over Last Month'
                                         }
                                       }
                                     });

@@ -116,7 +116,7 @@ def mapStock():
     len2 = len(stock2['history'])
     len3 = len(stock3['history'])
     max_len = max([len1, len2, len3])
-    for i in max_len:
+    for i in range(max_len):
         if len1 > i:
             js_return_stock1_30d.append(stock1['history'][i]['total'])
         else:
@@ -160,7 +160,10 @@ def mapStock():
     print('date3Total = ' + str(date3Total))
     print('date4Total = ' + str(date4Total))
     print('date5Total = ' + str(date5Total))
-
+    print(js_return_stock1_30d)
+    print(js_return_stock2_30d)
+    print(js_return_stock3_30d)
+    print(js_stock_total_30d)
     return render_template('investment_suggestions.html',
                            totalValueNow=totalValueNow,
                            stock1Symbol=stock1Symbol,
