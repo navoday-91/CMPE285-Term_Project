@@ -368,4 +368,4 @@ def setHistoryTodayValue(obj1, obj2, obj3):
 
 if __name__ == '__main__':
     app.secret_key = 'NRRACMPE285'
-    app.run(debug=True)
+    app.run(port=80, host='0.0.0.0')
