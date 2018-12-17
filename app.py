@@ -310,7 +310,7 @@ def getMapStocks(strategy, substrategy=None):
         "zero_waste": ["WM", "RSG", "CVA"], "water": ["DHR", "XYL", "PNR"],
         "reduce": ["BIP", "USCR", "REGI", "GPRE"], "reuse": ["IP", "NYLD", "PEGI", "AY"],
         "sustain": ["WY", "PEGI", "AY", "NEE"]},
-        "Index Investing": ["VOO", "SCHA", "VYM", "FSTMX", "VTSMX", "VEU", "SCHZ", "BLV", "GAMR", "VSS"],
+        "Index Investing": ["VOO", "SCHA", "VYM", "VEU", "SCHZ", "BLV", "GAMR", "VSS"],
         "Growth Investing": ["SBUX", "NXPI", "FB", "SFIX", "JNJ", "BRK.B", "CNC", "AAPL", "SFM", "DWDP"],
         "Quality Investing": ["GOOG", "AMZN", "AWK", "AAPL", "DIS", "FB", "NKE", "MSFT", "BAC", "ADP"],
         "Value Investing": ["AAL", "ALL", "AZO", "DHI", "KHC", "MPC", "NFX", "PHM", "UAL", "URI"]}
