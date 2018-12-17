@@ -95,7 +95,7 @@
 												</svg>
 											</a>
 											<ul>
-												<li><a href="financial.html">Financial
+												<li><a href="/suggestion">Financial
 													<svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 														 width="9px" height="5px" viewBox="0 0 9 5" enable-background="new 0 0 9 5" xml:space="preserve">
 														<g>
@@ -271,19 +271,15 @@
 					<form action="/map_stocks" class="call_form" method="post">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" class="input_item" name="name" id="name" placeholder="Your Name" required="required">
-							</div>
-							<div class="col-md-6">
-								<input type="email" class="input_item" name="email" id="email" placeholder="Your E-mail" required="required">
-							</div>
-							<div class="col-md-6">
-								<input type="number" step="any" name="amount" id="amount" class="input_item" placeholder="Investment Amount">
+								<input type="number" step="any" name="amount" min="5000" id="amount" class="input_item" placeholder="Investment Amount">
 							</div>
 							<div class="col-md-6">
 								<select class="dropdown_item input_item" name="strategy" id="strategy">
 									<option>Ethical Investing</option>
 									<option>Index Investing</option>
 									<option>Growth Investing</option>
+									<option>Quality Investing</option>
+									<option>Value Investing</option>
 								</select>
 							</div>
 							<div class="col-md-12">
@@ -291,6 +287,15 @@
 							</div>
 						</div>
 					</form>
+					{%if history%}
+						{% set count = namespace(a=1) %}
+						<div class="section_title">Your History</div>
+						{%for rec in history%}
+							<a href="/map_stocks?name1={{rec[3]}}&name2={{rec[4]}}&name3={{rec[5]}}&amount1={{rec[0]}}&amount2={{rec[1]}}&amount3={{rec[2]}}">
+								Portfolio {{ count.a }}:</a> <{{rec[6]}}> {{rec[7]}}<br/>
+								{% set count.a = count.a + 1 %}
+						{%endfor%}
+					{%endif%}
 				</div>
 			</div>
 		</div>

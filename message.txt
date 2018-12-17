@@ -1,0 +1,9 @@
+Dear ${PERSON_NAME},
+    Please find your quote below for your recent query:
+    ${stockname1} = ${stockamount1}
+    ${stockname2} = ${stockamount2}
+    ${stockname3} = ${stockamount3}
+    Total = ${total_amount}
+
+Best Regards,
+CMPE 285 Team Spartan

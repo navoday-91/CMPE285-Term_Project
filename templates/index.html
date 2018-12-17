@@ -95,8 +95,13 @@
 										</ul>
 									</div>
 									<div class="register_login">
-										<div class="register"><a href="#">register</a></div>
-										<div class="login"><a href="#">login</a></div>
+										{%if 'username' in session%}
+										<div class="register">Hello {{session['username']}}</div>
+										<div class="login"><a href="/logout">Logout</a></div>
+										{%else%}
+										<div class="register"><a href="/signup">register</a></div>
+										<div class="login"><a href="/login">login</a></div>
+										{%endif%}
 									</div>
 								</div>
 								<div class="burger">
@@ -156,8 +161,8 @@
 									</ul>
 								</div>
 								<div class="main_menu_contact ml-auto">
-									<div class="main_menu_phone"><img src="/static/images/phone-call.svg" alt=""><span>+8Fsu</span></div>
-									<div class="main_menu_email"><img src="/static/images/envelope.svg" alt=""><span>office@invest.com</span></div>
+									<div class="main_menu_phone"><img src="/static/images/phone-call.svg" alt=""><span>+800 888 8546</span></div>
+									<div class="main_menu_email"><img src="/static/images/envelope.svg" alt=""><span>navoday.91@gmail.com</span></div>
 									<div class="main_menu_search">
 										<div class="main_menu_search_button">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512" enable-background="new 0 0 512 512" width="15px" height="15px">
